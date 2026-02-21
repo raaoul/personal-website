@@ -1,7 +1,8 @@
 import type { Metadata } from "next"
 import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google"
 import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeProvider } from "@/components/providers/theme-provider"
+import { Navbar } from "@/components/navbar"
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -31,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={jetbrainsMono.variable} suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} scroll-smooth antialiased`}
       >
         <ThemeProvider
           attribute="class"
@@ -39,7 +40,14 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <div className="container mx-auto my-16 h-full max-w-7xl">
+            <div className="flex flex-row gap-8">
+              <div className="w-4/12">
+                <Navbar />
+              </div>
+              <div className="w-full">{children}</div>
+            </div>
+          </div>
         </ThemeProvider>
       </body>
     </html>
